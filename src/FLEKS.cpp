@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <signal.h>
+#include <omp.h>
 
 #include "libapi.h"
 #include "stuff.h"
@@ -40,12 +41,23 @@ int main(int argc, char **argv)
 
     display_init();
 
-    while(!cpu_shutdown)
+    #pragma omp parallel sections
     {
-        for(int i = 0; i < 29780; ++i)
-            fleks_step();
-        display_draw();
-        capture_events();
+        #pragma omp section
+        {
+            while(!cpu_shutdown)
+            {
+                fleks_step();
+            }
+        }
+        #pragma omp section
+        {
+            while(!cpu_shutdown)
+            {
+                display_draw();
+                capture_events();
+            }
+        }
     }
 
     display_destroy();

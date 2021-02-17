@@ -23,6 +23,8 @@ extern "C"{
     );
     void fleks_step();
     void fleks_destroy();
+    void fleks_savestate();
+    void fleks_loadstate();
 
 #ifdef __cplusplus
 }

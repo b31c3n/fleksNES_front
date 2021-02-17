@@ -173,9 +173,7 @@ bool display_draw()
         *screen,
         format_enum;
     int
-        pixelcount,
-        pitch,
-        rgb32 = SDL_PIXELFORMAT_RGBA32;
+        pitch;
 
     SDL_QueryTexture(
             display.texture_,
@@ -191,10 +189,6 @@ bool display_draw()
             NULL,
             (void **) &screen,
             &pitch);
-
-    //pixelcount = pitch / 4 * SCREEN_H;
-
-//    draw_background(format, pixels);
 
     for(size_t i = 0; i < 256 * 240; ++i)
     {
