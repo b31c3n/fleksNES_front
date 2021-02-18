@@ -28,7 +28,6 @@ void sigsegv(int signal)
 
 int main(int argc, char **argv)
 {
-
     signal(SIGINT, sigint);
     signal(SIGSEGV, sigsegv);
 
@@ -37,9 +36,9 @@ int main(int argc, char **argv)
                 mapper_mem,
                 &pixels,
                 &ram,
-                &ctrl_buffer);
+                &ctrl_buffer,
+                &scanline);
 
-    display_init();
 
     #pragma omp parallel sections
     {
@@ -52,13 +51,15 @@ int main(int argc, char **argv)
         }
         #pragma omp section
         {
+            display_init();
+
             while(!cpu_shutdown)
             {
                 display_draw();
                 capture_events();
             }
+            display_destroy();
         }
     }
-
-    display_destroy();
 }
+

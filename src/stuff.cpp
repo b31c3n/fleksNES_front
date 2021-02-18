@@ -14,6 +14,10 @@ char
     *ram = nullptr,
     *ctrl_buffer = nullptr;
 
+extern unsigned short
+    *scanline = nullptr;
+
+
 bool
     cpu_shutdown   = 0,
     cpu_pause      = 0,

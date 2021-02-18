@@ -15,6 +15,8 @@ extern char
     *ram,
     *ctrl_buffer;
 
+extern unsigned short
+    *scanline;
 
 extern bool
     cpu_shutdown,
